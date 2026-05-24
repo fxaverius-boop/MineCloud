@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>MineCloud · A Partnership Proposal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/json" id="speaker-notes">[]</script>
+<style>
+  :root {
+    --bg-paper: #F5F0E6;
+    --bg-card: #FFFFFF;
+    --bg-soft: #EDE5D3;
+    --bg-sand: #E0D4BB;
+    --text-primary: #1E3A5F;
+    --text-secondary: #4A5C75;
+    --text-tertiary: #7A8499;
+    --text-inverse: #F5F0E6;
+    --accent-navy: #1E3A5F;
+    --accent-navy-bright: #2C4A6E;
+    --accent-blue: #5B9BD5;
+    --accent-blue-soft: #87CEEB;
+    --accent-gold: #D4A04A;
+    --accent-gold-bright: #E0B870;
+    --accent-terracotta: #C77B45;
+    --accent-terracotta-soft: #D8895A;
+    --line-subtle: rgba(30,58,95,0.08);
+    --line-medium: rgba(30,58,95,0.15);
+    --line-accent: rgba(91,155,213,0.30);
+    --line-warm: rgba(199,123,69,0.30);
+    --type-display: 144px;
+    --type-h1: 72px;
+    --type-h2: 56px;
+    --type-h3: 40px;
+    --type-h4: 32px;
+    --type-lead: 24px;
+    --type-body: 18px;
+    --type-small: 15px;
+    --type-mono: 12px;
+    --pad-x: 128px;
+    --pad-y: 96px;
+    --serif: "Fraunces", "Times New Roman", serif;
+    --sans: "Inter", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  html, body { background:#000; margin:0; padding:0; }
+  body { font-family: var(--sans); color: var(--text-primary); }
+  deck-stage { background:#000; }
+
+  .slide {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .slide::before {
+    content:"";
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'><g fill='none' stroke='%231E3A5F' stroke-width='0.6' stroke-opacity='0.06'><path d='M-40 120 Q 120 60 260 130 T 560 90 T 820 150'/><path d='M-40 200 Q 140 150 280 210 T 600 180 T 880 230'/><path d='M-40 290 Q 160 240 300 300 T 620 270 T 900 320'/><path d='M-40 380 Q 130 330 270 390 T 600 360 T 880 410'/><path d='M-40 470 Q 150 420 290 480 T 610 450 T 880 500'/><path d='M-40 560 Q 140 510 280 570 T 620 540 T 900 580'/></g></svg>");
+    background-size: 700px 700px;
+    pointer-events:none; z-index:0;
+  }
+  .slide::after {
+    content:"";
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.22  0 0 0 0 0.37  0 0 0 0.45 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/></svg>");
+    background-size: 240px 240px;
+    mix-blend-mode: multiply; opacity: .55;
+    pointer-events:none; z-index:0;
+  }
+  .slide > * { position: relative; z-index: 1; }
+
+  .figlabel {
+    position:absolute; top:48px; left: var(--pad-x);
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent-navy); z-index: 5;
+  }
+  .figlabel .dot { color: var(--accent-gold); margin: 0 .6em; }
+  .logomark {
+    position:absolute; top:32px; right: 80px;
+    width: 150px; height: 150px; z-index: 5;
+    object-fit: contain;
+  }
+  .counter {
+    position:absolute; bottom:28px; right: var(--pad-x);
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.14em; color: var(--text-secondary); z-index: 5;
+  }
+  .counter b { color: var(--accent-navy); font-weight: 500; }
+  .dotnav {
+    position:absolute; bottom:34px; left:50%; transform:translateX(-50%);
+    display:flex; gap:10px; z-index:5;
+  }
+  .dotnav i {
+    display:block; width:6px; height:6px; border-radius:50%;
+    background: transparent; border: 1px solid var(--line-medium);
+  }
+  .dotnav i.on { background: var(--accent-navy); border-color: var(--accent-navy); }
+  .topprog {
+    position:absolute; top:0; left:0; height:2px;
+    background: var(--accent-navy); z-index: 6;
+  }
+
+  .particles { position:absolute; inset:0; pointer-events:none; z-index:0; }
+  .particles span {
+    position:absolute; bottom:-10px;
+    width:2px; height:2px; border-radius:50%;
+    opacity:.22; animation: drift linear infinite;
+  }
+  @keyframes drift {
+    0% { transform: translateY(0) translateX(0); opacity:0; }
+    10% { opacity:.22; }
+    90% { opacity:.18; }
+    100% { transform: translateY(-1200px) translateX(40px); opacity:0; }
+  }
+
+  .mono { font-family: var(--mono); text-transform:uppercase; letter-spacing:0.14em; font-size:12px; color: var(--accent-navy); }
+  .mono-sm { font-family: var(--mono); text-transform:uppercase; letter-spacing:0.16em; font-size:11px; color: var(--text-tertiary); }
+  .serif { font-family: var(--serif); font-weight: 500; color: var(--text-primary); }
+  .ital { font-family: var(--serif); font-style: italic; font-weight: 400; }
+  .gold { color: var(--accent-gold); }
+  .terra { color: var(--accent-terracotta); }
+  .blue { color: var(--accent-blue); }
+  .body { font-family: var(--sans); font-size: var(--type-body); line-height: 1.7; color: var(--text-primary); }
+  .lead { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: var(--type-lead); line-height: 1.55; color: var(--text-secondary); }
+
+  .hline { height:2px; background: var(--accent-gold); border-radius:1px; transform-origin: left center; }
+  .hline.wobble { background: linear-gradient(90deg, var(--accent-gold) 0%, var(--accent-gold-bright) 40%, var(--accent-gold) 100%); }
+
+  .pullquote { border-top: 1px solid var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding: 28px 0; }
+  .card { background: var(--bg-card); border: 1px solid var(--line-medium); border-radius: 6px; padding: 28px; }
+
+  @keyframes rvIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .slide [data-rv] { opacity: 1; transform: translateY(0); }
+  section.entering .slide [data-rv] { animation: rvIn .7s cubic-bezier(.2,.7,.2,1) both; }
+  section.entering .slide [data-rv][data-d="1"] { animation-delay: .06s; }
+  section.entering .slide [data-rv][data-d="2"] { animation-delay: .14s; }
+  section.entering .slide [data-rv][data-d="3"] { animation-delay: .22s; }
+  section.entering .slide [data-rv][data-d="4"] { animation-delay: .30s; }
+  section.entering .slide [data-rv][data-d="5"] { animation-delay: .38s; }
+  section.entering .slide [data-rv][data-d="6"] { animation-delay: .46s; }
+  section.entering .slide [data-rv][data-d="7"] { animation-delay: .54s; }
+  section.entering .slide [data-rv][data-d="8"] { animation-delay: .62s; }
+
+  .draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  section.entering .slide .draw { animation: dash 1.6s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes dash { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+  @keyframes goldpulse {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(212,160,74,.5)); }
+    50% { filter: drop-shadow(0 0 18px rgba(212,160,74,.9)); }
+  }
+  .goldpulse { animation: goldpulse 3.4s ease-in-out infinite; }
+  @keyframes softpulse { 0%,100% { opacity: .65; } 50% { opacity: 1; } }
+  .softpulse { animation: softpulse 3.6s ease-in-out infinite; }
+
+  .strike { text-decoration: line-through; text-decoration-color: var(--text-tertiary); text-decoration-thickness: 1.5px; color: var(--text-tertiary); }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+<!-- SLIDE 1 · COVER -->
+<section data-label="01 Cover" data-no-logo="1">
+  <div class="slide" data-particles="22" style="width:100%; height:100%;">
+    <div class="figlabel">MineCloud <span class="dot">·</span> A Partnership Proposal</div>
+    <div style="position:absolute; left:128px; top:50%; transform:translateY(-50%); max-width:1000px;">
+      <div class="serif" data-rv data-d="1" style="font-size:144px; line-height:.95; letter-spacing:-0.02em; font-weight:500;">
+        <span style="display:block;">Mine<span style="color:var(--accent-blue);">Cloud</span></span>
+      </div>
+      <div data-rv data-d="2" style="margin-top:36px; margin-bottom:36px;">
+        <div class="hline" style="width:80px;"></div>
+      </div>
+      <div class="ital" data-rv data-d="3" style="font-size:32px; line-height:1.35; max-width:780px; color:var(--text-primary);">
+        Portal <span class="gold ital" style="font-style:italic;">terpadu</span> belajar profesional<br/>tambang Indonesia.
+      </div>
+      <div style="margin-top:96px; display:flex; gap:96px;">
+        <div data-rv data-d="5">
+          <div class="mono" style="color:var(--text-tertiary);">Dipresentasikan untuk</div>
+          <div class="serif" style="font-size:28px; margin-top:10px;">Para Mentor</div>
+        </div>
+        <div data-rv data-d="6">
+          <div class="mono" style="color:var(--text-tertiary);">Dipresentasikan oleh</div>
+          <div class="serif" style="font-size:24px; margin-top:10px;">Ir. Fransiscus Saferius, S.T.</div>
+          <div class="mono-sm" style="margin-top:8px;">Mei 2026 <span style="color:var(--accent-gold);">·</span> Jakarta</div>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute; right:160px; top:0; bottom:0; width:480px; display:flex; align-items:center; justify-content:center;" data-rv data-d="4">
+      <img src="assets/minecloud-logo.png" alt="MineCloud" style="width:100%; max-width:520px; height:auto; object-fit:contain;" />
+    </div>
+    <svg style="position:absolute; right:48px; bottom:96px; opacity:.6;" width="180" height="120" viewBox="0 0 180 120" fill="none">
+      <g stroke="#1E3A5F" stroke-opacity=".15" stroke-width=".8"><path d="M0 60 Q 40 30 80 50 T 180 40"/><path d="M0 80 Q 50 50 90 70 T 180 60"/><path d="M0 100 Q 60 70 100 90 T 180 80"/></g>
+      <g stroke="#87CEEB" stroke-opacity=".35" stroke-width=".7" fill="none"><path d="M20 20 L60 20 L60 10 L100 10"/><circle cx="20" cy="20" r="2" fill="#87CEEB" fill-opacity=".5"/><circle cx="100" cy="10" r="2" fill="#87CEEB" fill-opacity=".5"/></g>
+    </svg>
+  </div>
+</section>
+
+<!-- SLIDE 2 · PERSONAL INVITATION -->
+<section data-label="02 Invitation">
+  <div class="slide" data-particles="14" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.2 <span class="dot">·</span> Invitation</div>
+    <svg style="position:absolute; left:88px; top:18%; width:8px; height:64%;" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="4" y1="0" x2="4" y2="600" stroke="#1E3A5F" stroke-opacity=".18" stroke-width="1"/>
+      <circle cx="4" cy="80" r="3.2" fill="#D4A04A" class="softpulse" style="animation-duration:3.2s"/>
+      <circle cx="4" cy="220" r="2.4" fill="#D4A04A" class="softpulse" style="animation-duration:4.1s"/>
+      <circle cx="4" cy="370" r="3" fill="#D4A04A" class="softpulse" style="animation-duration:3.6s"/>
+      <circle cx="4" cy="520" r="2.6" fill="#D4A04A" class="softpulse" style="animation-duration:4.4s"/>
+    </svg>
+    <svg style="position:absolute; right:88px; top:28%; width:8px; height:44%;" viewBox="0 0 8 400" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="4" y1="0" x2="4" y2="400" stroke="#1E3A5F" stroke-opacity=".18" stroke-width="1"/>
+      <circle cx="4" cy="120" r="2.6" fill="#D4A04A" class="softpulse" style="animation-duration:3.8s"/>
+      <circle cx="4" cy="290" r="2.4" fill="#D4A04A" class="softpulse" style="animation-duration:4.2s"/>
+    </svg>
+    <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 120px 200px;">
+      <div class="ital" data-rv data-d="1" style="font-size:84px; line-height:1.05; text-align:center; max-width:1200px; color:var(--text-primary);">"Saya butuh seorang seperti Anda."</div>
+      <svg data-rv data-d="2" width="120" height="14" viewBox="0 0 120 14" style="margin:48px 0 56px;"><path class="draw" pathLength="1" d="M2 8 Q 30 2 60 7 T 118 6" stroke="#D4A04A" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      <div class="ital" data-rv data-d="3" style="font-size:24px; line-height:1.85; max-width:780px; color:var(--text-primary); text-align:left;">
+        <p style="margin:0 0 18px;">Bertahun-tahun saya belajar dari Anda &mdash; langsung maupun lewat pengamatan.</p>
+        <p style="margin:0 0 18px;">Hari ini saya mengajak Anda untuk membangun sesuatu bersama saya.</p>
+        <p style="margin:0 0 18px;">Yang saya butuh bukan modal Anda.</p>
+        <p style="margin:0 0 0;">Yang saya butuh: <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">pengalaman</span>, <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">jaringan</span>, dan <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">kebijaksanaan</span> Anda.</p>
+      </div>
+      <div data-rv data-d="5" style="align-self:flex-end; margin-top:48px; max-width:780px; width:100%; text-align:right;">
+        <span class="ital" style="font-size:22px; color:var(--text-primary);">&mdash; Fransiscus</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3 · FRAGMENTATION -->
+<section data-label="03 Fragmentation">
+  <div class="slide" data-particles="14" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.3 <span class="dot">·</span> The Fragmentation Problem</div>
+    <div style="position:absolute; left:128px; right:128px; top:108px; bottom:108px; display:flex; flex-direction:column;">
+      <h2 class="serif" data-rv data-d="1" style="font-family:var(--serif); font-weight:500; font-size:54px; line-height:1.12; margin:0; max-width:1500px; letter-spacing:-0.01em;">
+        Mahasiswa dan fresh graduate tambang Indonesia <span class="ital" style="color:var(--accent-terracotta);">belajar dari ribuan sumber</span> &mdash; yang berserakan dan tidak terhubung.
+      </h2>
+      <p class="ital" data-rv data-d="2" style="font-size:22px; line-height:1.5; color:var(--text-secondary); max-width:880px; margin:24px 0 0;">Generasi muda tambang Indonesia tidak kekurangan informasi.<br/>Mereka kelebihan &mdash; tapi semua tersebar tanpa peta.</p>
+      <div style="flex:1; display:grid; grid-template-columns: 1.05fr 1.25fr; gap:48px; margin-top:36px; align-items:stretch;">
+        <div data-rv data-d="3" style="position:relative; min-height:480px;">
+          <svg viewBox="0 0 620 520" width="100%" height="100%" style="display:block;">
+            <g transform="translate(310 260)"><circle r="42" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><circle cx="0" cy="-10" r="11" fill="none" stroke="#1E3A5F" stroke-width="1.5"/><path d="M-15 22 Q 0 0 15 22" fill="none" stroke="#1E3A5F" stroke-width="1.5" stroke-linecap="round"/><rect x="-22" y="6" width="10" height="14" fill="none" stroke="#1E3A5F" stroke-width="1.2"/><rect x="12" y="6" width="10" height="14" fill="none" stroke="#1E3A5F" stroke-width="1.2"/></g>
+            <g font-family="Inter, sans-serif" font-size="8" text-anchor="middle">
+              <g transform="translate(80 80)"><rect x="-16" y="-10" width="32" height="20" rx="4" fill="#C77B45"/><path d="M-4 -5 L7 0 L-4 5 Z" fill="#FFF"/></g>
+              <g transform="translate(190 50)"><circle r="14" fill="#5B9BD5"/><path d="M-7 -2 L7 -5 L4 6 L-1 2 Z" fill="#FFF"/></g>
+              <g transform="translate(330 70)"><rect x="-12" y="-14" width="24" height="28" rx="2" fill="#FFF" stroke="#1E3A5F" stroke-width="1"/><text y="3" fill="#C77B45" font-weight="600" font-size="8">PDF</text></g>
+              <g transform="translate(460 50)"><rect x="-14" y="-10" width="28" height="20" rx="2" fill="#FFF" stroke="#1E3A5F" stroke-width="1"/><line x1="-9" y1="-4" x2="9" y2="-4" stroke="#1E3A5F" stroke-width=".8"/><line x1="-9" y1="0" x2="9" y2="0" stroke="#1E3A5F" stroke-width=".8"/><line x1="-9" y1="4" x2="4" y2="4" stroke="#1E3A5F" stroke-width=".8"/></g>
+              <g transform="translate(540 130)"><path d="M-14 -8 L0 -10 L14 -8 L14 10 L0 8 L-14 10 Z" fill="#D4A04A" stroke="#1E3A5F" stroke-width="1"/><line x1="0" y1="-10" x2="0" y2="8" stroke="#1E3A5F" stroke-width=".8"/></g>
+              <g transform="translate(550 250)"><path d="M-14 -8 Q -14 -14 -8 -14 L 8 -14 Q 14 -14 14 -8 L 14 4 Q 14 10 8 10 L -2 10 L -8 16 L -6 10 Q -14 10 -14 4 Z" fill="#FFF" stroke="#1E3A5F" stroke-width="1"/><circle cx="-5" cy="-2" r="1.4" fill="#1E3A5F"/><circle cx="0" cy="-2" r="1.4" fill="#1E3A5F"/><circle cx="5" cy="-2" r="1.4" fill="#1E3A5F"/></g>
+              <g transform="translate(530 380)"><path d="M-14 -8 L -4 -8 L 0 -4 L 14 -4 L 14 8 L -14 8 Z" fill="#D4A04A" stroke="#1E3A5F" stroke-width="1"/></g>
+              <g transform="translate(450 460)"><rect x="-12" y="-12" width="24" height="24" rx="3" fill="#C77B45"/><text y="3" fill="#FFF" font-weight="700" font-size="9">P</text></g>
+              <g transform="translate(330 480)"><rect x="-14" y="-10" width="28" height="20" fill="#FFF" stroke="#1E3A5F" stroke-width="1"/><line x1="-14" y1="-3" x2="14" y2="-3" stroke="#1E3A5F" stroke-width=".7"/><line x1="-14" y1="3" x2="14" y2="3" stroke="#1E3A5F" stroke-width=".7"/><line x1="-5" y1="-10" x2="-5" y2="10" stroke="#1E3A5F" stroke-width=".7"/><line x1="5" y1="-10" x2="5" y2="10" stroke="#1E3A5F" stroke-width=".7"/></g>
+              <g transform="translate(190 470)"><rect x="-14" y="-10" width="28" height="20" rx="2" fill="#1E3A5F"/><path d="M-3 -5 L5 0 L-3 5 Z" fill="#D4A04A"/></g>
+              <g transform="translate(80 440)"><circle r="13" fill="#FFF" stroke="#1E3A5F" stroke-width="1"/><rect x="-3" y="-7" width="6" height="10" rx="3" fill="#5B9BD5"/><path d="M-6 1 Q 0 7 6 1" fill="none" stroke="#5B9BD5" stroke-width="1.2"/></g>
+              <g transform="translate(70 270)"><circle r="13" fill="#FFF" stroke="#1E3A5F" stroke-width="1"/><circle cx="-5" cy="-3" r="2" fill="#5B9BD5"/><circle cx="5" cy="-3" r="2" fill="#5B9BD5"/><circle cx="0" cy="5" r="2" fill="#5B9BD5"/><line x1="-5" y1="-3" x2="5" y2="-3" stroke="#1E3A5F" stroke-width=".6"/><line x1="-5" y1="-3" x2="0" y2="5" stroke="#1E3A5F" stroke-width=".6"/><line x1="5" y1="-3" x2="0" y2="5" stroke="#1E3A5F" stroke-width=".6"/></g>
+            </g>
+            <g stroke="#1E3A5F" stroke-opacity=".35" fill="none">
+              <line x1="80" y1="80" x2="280" y2="240" stroke-dasharray="3 4" stroke-width=".8"/><line x1="190" y1="50" x2="300" y2="225" stroke-width=".8"/><line x1="330" y1="70" x2="316" y2="218" stroke-width=".8"/><line x1="460" y1="50" x2="340" y2="240" stroke-dasharray="2 5" stroke-width=".8"/><line x1="540" y1="130" x2="350" y2="255" stroke-width=".8" stroke-opacity=".2"/><line x1="550" y1="250" x2="355" y2="260" stroke-width=".8"/><line x1="530" y1="380" x2="345" y2="280" stroke-dasharray="4 4" stroke-width=".8"/><line x1="450" y1="460" x2="335" y2="290" stroke-width=".8"/><line x1="330" y1="480" x2="316" y2="304" stroke-dasharray="3 4" stroke-width=".8"/><line x1="190" y1="470" x2="285" y2="295" stroke-width=".8" stroke-opacity=".18"/><line x1="80" y1="440" x2="275" y2="285" stroke-width=".8"/><line x1="70" y1="270" x2="265" y2="260" stroke-dasharray="2 4" stroke-width=".8"/>
+            </g>
+          </svg>
+        </div>
+        <div data-rv data-d="4" style="display:flex; flex-direction:column; gap:18px;">
+          <div class="card" style="display:flex; gap:20px; padding:24px;">
+            <div style="flex-shrink:0; width:44px; height:44px; display:flex; align-items:center; justify-content:center;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C77B45" stroke-width="1.5"><path d="M4 14 L10 14 L10 8 L16 8 L16 14 L22 14 L22 18 L28 18 L28 24 L22 24 L22 28 L4 28 Z"/><path d="M16 8 L20 4 L24 8"/></svg></div>
+            <div style="flex:1;"><div class="mono" style="color:var(--accent-gold);">#01</div><div class="serif" style="font-size:21px; margin-top:4px; line-height:1.2;">Knowledge tersebar di puluhan platform</div><p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin:8px 0 0;">Mahasiswa harus berburu informasi di YouTube, Telegram, blog, forum, buku, dan grup WhatsApp. Tidak ada satu tempat yang menyediakan knowledge tambang berkualitas secara terstruktur dalam Bahasa Indonesia.</p></div>
+          </div>
+          <div class="card" style="display:flex; gap:20px; padding:24px;">
+            <div style="flex-shrink:0; width:44px; height:44px; display:flex; align-items:center; justify-content:center;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C77B45" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="2"/><path d="M12 12 Q 12 8 16 8 Q 20 8 20 12 Q 20 14 16 16 L16 19"/><circle cx="16" cy="23" r=".6" fill="#C77B45"/></svg></div>
+            <div style="flex:1;"><div class="mono" style="color:var(--accent-gold);">#02</div><div class="serif" style="font-size:21px; margin-top:4px; line-height:1.2;">Tidak tahu mana sumber yang bisa dipercaya</div><p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin:8px 0 0;">Konten gratis di internet kualitasnya variabel &mdash; bisa outdated, salah, atau bahkan misleading. Fresh graduate sering belajar dari sumber yang justru memberikan informasi yang harus mereka &lsquo;lupakan&rsquo; setelah masuk lapangan.</p></div>
+          </div>
+          <div class="card" style="display:flex; gap:20px; padding:24px;">
+            <div style="flex-shrink:0; width:44px; height:44px; display:flex; align-items:center; justify-content:center;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C77B45" stroke-width="1.5"><path d="M2 22 L10 22 L12 18"/><path d="M30 22 L22 22 L20 18"/><path d="M2 26 L30 26" stroke-dasharray="2 3"/><path d="M8 18 L8 12 M24 18 L24 12"/></svg></div>
+            <div style="flex:1;"><div class="mono" style="color:var(--accent-gold);">#03</div><div class="serif" style="font-size:21px; margin-top:4px; line-height:1.2;">Kampus mengajar teori, lapangan butuh praktik</div><p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin:8px 0 0;">Kurikulum kampus sering tertinggal dari realitas lapangan. Mahasiswa lulus dengan textbook knowledge, tapi tidak tahu cara baca dispatch report, hitung cycle time, atau memahami dinamika operasional pit.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="pullquote ital" data-rv data-d="6" style="margin-top:18px; padding:14px 0; text-align:center; font-size:18px; line-height:1.45; color:var(--text-primary); max-width:1400px; margin-left:auto; margin-right:auto;">
+        Ada ribuan jam knowledge tambang berharga di Indonesia. Yang dibutuhkan bukan <span class="strike" style="font-style:italic;">lebih banyak konten</span> &mdash; tapi <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">satu tempat yang mengkurasi, menyatukan, dan menyajikannya dengan baik</span>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4 · MARKET PROOF -->
+<section data-label="04 Market Proof">
+  <div class="slide" data-particles="16" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.4 <span class="dot">·</span> Market Reality</div>
+    <div style="position:absolute; left:128px; right:128px; top:104px; bottom:118px; display:flex; flex-direction:column;">
+      <h2 class="serif" data-rv data-d="1" style="font-weight:500; font-size:50px; line-height:1.08; margin:0; max-width:1450px; letter-spacing:-0.01em;">Indonesia, raksasa tambang dunia.<br/>Tapi <span class="ital" style="color:var(--accent-gold);">infrastruktur belajarnya</span> tertinggal.</h2>
+      <div style="margin-top:24px; display:grid; grid-template-columns: 0.85fr 1.15fr; gap:48px; align-items:start;">
+        <div data-rv data-d="2">
+          <div class="mono" style="margin-bottom:14px;">Indonesia di Peta Global</div>
+          <svg viewBox="0 0 600 420" width="100%" style="display:block; max-height:340px;">
+            <image href="assets/indonesia-map.png" x="0" y="0" width="600" height="420" preserveAspectRatio="xMidYMid meet" opacity="0.55"/>
+            <g>
+              <circle cx="246" cy="171" r="6" fill="#D4A04A" class="goldpulse" style="animation-duration:3.2s"/><text x="256" y="168" font-family="JetBrains Mono, monospace" font-size="9" fill="#1E3A5F" letter-spacing="1.2">EAST KALIMANTAN</text>
+              <circle cx="210" cy="212" r="5.5" fill="#D4A04A" class="goldpulse" style="animation-duration:3.8s"/><text x="220" y="223" font-family="JetBrains Mono, monospace" font-size="9" fill="#1E3A5F" letter-spacing="1.2">SOUTH KALIMANTAN</text>
+              <circle cx="320" cy="181" r="6.5" fill="#D4A04A" class="goldpulse" style="animation-duration:4.1s"/><text x="330" y="178" font-family="JetBrains Mono, monospace" font-size="9" fill="#1E3A5F" letter-spacing="1.2">CENTRAL SULAWESI</text>
+              <circle cx="310" cy="241" r="6" fill="#D4A04A" class="goldpulse" style="animation-duration:3.5s"/><text x="320" y="251" font-family="JetBrains Mono, monospace" font-size="9" fill="#1E3A5F" letter-spacing="1.2">SE SULAWESI</text>
+              <circle cx="480" cy="221" r="7" fill="#D4A04A" class="goldpulse" style="animation-duration:3s"/><text x="446" y="208" font-family="JetBrains Mono, monospace" font-size="9" fill="#1E3A5F" letter-spacing="1.2">PAPUA</text>
+            </g>
+            <g stroke="#D4A04A" stroke-opacity=".5" stroke-width=".8" fill="none" stroke-dasharray="3 4"><line x1="246" y1="171" x2="320" y2="181"/><line x1="320" y1="181" x2="310" y2="241"/><line x1="310" y1="241" x2="480" y2="221"/><line x1="210" y1="212" x2="246" y2="171"/></g>
+          </svg>
+        </div>
+        <div data-rv data-d="3" style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+          <div class="card" style="padding:16px 18px;"><div class="mono" style="font-size:10px;">Produksi Nikel #1</div><div class="serif" style="font-size:36px; margin-top:6px; line-height:1;"><span style="color:var(--accent-gold);">2,2</span> jt ton</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px;">59,46% produksi global, 2024 (USGS)</div></div>
+          <div class="card" style="padding:16px 18px;"><div class="mono" style="font-size:10px;">Eksportir Batubara #1</div><div class="serif" style="font-size:36px; margin-top:6px; line-height:1;"><span style="color:var(--accent-gold);">836</span> jt ton</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px;">Termal terbesar dunia sejak 2018 (ESDM)</div></div>
+          <div class="card" style="padding:16px 18px;"><div class="mono" style="font-size:10px;">Perusahaan Aktif</div><div class="serif" style="font-size:36px; margin-top:6px; line-height:1;"><span style="color:var(--accent-gold);">4.250</span></div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px;">IUP minerba aktif (ESDM, Juli 2025)</div></div>
+          <div class="card" style="padding:16px 18px;"><div class="mono" style="font-size:10px;">Tenaga Kerja Formal</div><div class="serif" style="font-size:36px; margin-top:6px; line-height:1;"><span style="color:var(--accent-gold);">308K</span></div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px;">Pekerja minerba (ESDM 2023)</div></div>
+        </div>
+      </div>
+      <div data-rv data-d="4" style="margin-top:32px;">
+        <div class="mono" style="margin-bottom:14px;">TAM yang Realistis dalam 5 Tahun</div>
+        <table style="width:100%; border-collapse:collapse; font-family:var(--sans);">
+          <thead><tr style="border-bottom:1.5px solid var(--accent-gold);"><th style="text-align:left; padding:12px 16px 12px 0;" class="mono">Segmen</th><th style="text-align:right; padding:12px 16px;" class="mono">Populasi</th><th style="text-align:right; padding:12px 16px;" class="mono">Reachable</th><th style="text-align:right; padding:12px 16px;" class="mono">Spend/tahun</th><th style="text-align:right; padding:12px 0 12px 16px;" class="mono">TAM/tahun</th></tr></thead>
+          <tbody style="font-size:15px; color:var(--text-primary);">
+            <tr><td style="padding:7px 16px 7px 0;">Mahasiswa tambang</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">8.000</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">15%</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">Rp 150rb</td><td style="text-align:right; padding:11px 0 11px 16px; font-family:var(--serif);">Rp 180 jt</td></tr>
+            <tr style="background:var(--bg-soft);"><td style="padding:7px 16px 7px 0;">Fresh graduate</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">3.500</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">25%</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">Rp 400rb</td><td style="text-align:right; padding:11px 0 11px 16px; font-family:var(--serif);">Rp 350 jt</td></tr>
+            <tr><td style="padding:7px 16px 7px 0;">Junior engineer</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">15.000</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">8%</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">Rp 800rb</td><td style="text-align:right; padding:11px 0 11px 16px; font-family:var(--serif);">Rp 960 jt</td></tr>
+            <tr style="background:var(--bg-soft);"><td style="padding:7px 16px 7px 0;">Mid-level engineer</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">10.000</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">5%</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">Rp 2 jt</td><td style="text-align:right; padding:11px 0 11px 16px; font-family:var(--serif);">Rp 1 M</td></tr>
+            <tr><td style="padding:7px 16px 7px 0;">Corporate B2B</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">4.250 PT</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">0,5%</td><td style="text-align:right; padding:11px 16px; font-family:var(--serif);">Rp 150 jt</td><td style="text-align:right; padding:11px 0 11px 16px; font-family:var(--serif);">Rp 3,15 M</td></tr>
+            <tr style="border-top:1.5px solid var(--accent-gold); color:var(--accent-gold);"><td style="padding:10px 16px 10px 0; font-weight:600;" class="mono">Total Realistic SAM</td><td colspan="3"></td><td style="text-align:right; padding:10px 0 10px 16px; font-family:var(--serif); font-size:22px; font-weight:500;">Rp 5,6 M / tahun</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div data-rv data-d="5" style="margin-top:10px;"><div class="pullquote ital" style="text-align:center; font-size:16px; line-height:1.4; color:var(--text-primary); padding:9px 0;">Pasar yang <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">realistis bisa diraih dalam 5 tahun</span>, bukan TAM agregat yang inflated. Lebih dari cukup untuk visi kita &mdash; yang dibutuhkan adalah <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">eksekusi konsisten</span>. <span class="mono-sm" style="margin-left:14px; color:var(--text-tertiary);">Sumber: ESDM, USGS, BPS, IMARC Group (2024)</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5 · WHAT IS MINECLOUD -->
+<section data-label="05 What is MineCloud">
+  <div class="slide" data-particles="16" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.5 <span class="dot">·</span> What is MineCloud</div>
+    <div style="position:absolute; left:128px; right:128px; top:108px; bottom:108px; display:flex; flex-direction:column;">
+      <h2 class="serif" data-rv data-d="1" style="font-weight:500; font-size:60px; line-height:1.1; margin:0; max-width:1500px; letter-spacing:-0.01em;">Satu portal. Semua format.<br/><span class="ital" style="color:var(--accent-gold);">Khusus profesional tambang Indonesia.</span></h2>
+      <p class="ital" data-rv data-d="2" style="font-size:19px; line-height:1.65; color:var(--text-secondary); max-width:840px; margin:20px 0 0;">MineCloud adalah portal terpadu yang menyediakan buku fisik, ebook, buku interaktif, audiobook, video course, video tutorial, dan aplikasi tambang dalam satu tempat. Dirancang untuk profesional tambang Indonesia di setiap tahap karir &mdash; dari mahasiswa hingga senior.</p>
+      <div data-rv data-d="3" style="flex:1; position:relative; margin-top:8px; min-height:0;">
+        <svg viewBox="0 0 1600 660" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="display:block;">
+          <defs><radialGradient id="centerGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D4A04A" stop-opacity="0.35"/><stop offset="100%" stop-color="#D4A04A" stop-opacity="0"/></radialGradient><pattern id="circuit" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M10 30 L30 30 L30 10 M30 30 L50 30 L50 50" stroke="#87CEEB" stroke-opacity=".18" stroke-width=".7" fill="none"/><circle cx="10" cy="30" r="1.5" fill="#87CEEB" fill-opacity=".25"/><circle cx="30" cy="10" r="1.5" fill="#87CEEB" fill-opacity=".25"/></pattern></defs>
+          <rect width="1600" height="600" fill="url(#circuit)"/>
+          <g stroke="#1E3A5F" stroke-opacity=".35" stroke-width="1.4" fill="none"><line x1="800" y1="300" x2="800" y2="90"/><line x1="800" y1="300" x2="1100" y2="140"/><line x1="800" y1="300" x2="1230" y2="300"/><line x1="800" y1="300" x2="1100" y2="470"/><line x1="800" y1="300" x2="800" y2="540"/><line x1="800" y1="300" x2="500" y2="470"/><line x1="800" y1="300" x2="370" y2="300"/></g>
+          <g fill="#D4A04A"><circle r="3"><animateMotion dur="4s" repeatCount="indefinite" path="M800 300 L800 90"/></circle><circle r="3"><animateMotion dur="4.3s" repeatCount="indefinite" path="M800 300 L1100 140"/></circle><circle r="3"><animateMotion dur="4.6s" repeatCount="indefinite" path="M800 300 L1230 300"/></circle><circle r="3"><animateMotion dur="4.1s" repeatCount="indefinite" path="M800 300 L1100 470"/></circle><circle r="3"><animateMotion dur="4.4s" repeatCount="indefinite" path="M800 300 L800 540"/></circle><circle r="3"><animateMotion dur="4.7s" repeatCount="indefinite" path="M800 300 L500 470"/></circle><circle r="3"><animateMotion dur="4.2s" repeatCount="indefinite" path="M800 300 L370 300"/></circle></g>
+          <g transform="translate(800 300)"><circle r="90" fill="url(#centerGlow)"/><circle r="60" fill="#FFFFFF" stroke="#D4A04A" stroke-width="2" class="goldpulse"/><image href="assets/minecloud-logo.png" x="-50" y="-54" width="100" height="100" preserveAspectRatio="xMidYMid meet"/><text y="86" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#1E3A5F" letter-spacing="1.4">MINECLOUD PORTAL</text></g>
+          <g transform="translate(800 90)"><circle r="36" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><path d="M-14 -8 L0 -10 L14 -8 L14 10 L0 8 L-14 10 Z"/><line x1="0" y1="-10" x2="0" y2="8"/></g><text y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="500" fill="#1E3A5F">Buku Fisik</text><text y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4A5C75">Print-on-demand. Bacaan fisik.</text></g>
+          <g transform="translate(1100 140)"><circle r="36" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><rect x="-12" y="-14" width="24" height="28" rx="2"/><line x1="-7" y1="-8" x2="7" y2="-8"/><line x1="-7" y1="-3" x2="7" y2="-3"/><line x1="-7" y1="2" x2="7" y2="2"/><line x1="-7" y1="7" x2="3" y2="7"/></g><text y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="500" fill="#1E3A5F">Ebook</text><text y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4A5C75">PDF terstruktur. Mobile &amp; desktop.</text></g>
+          <g transform="translate(1230 300)"><circle r="36" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><rect x="-13" y="-10" width="26" height="20" rx="2"/><path d="M-4 -2 L4 0 L-2 4 L-4 -2 Z" fill="#D4A04A" stroke="none"/><path d="M2 4 L6 8"/></g><text y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="500" fill="#1E3A5F">Buku Interaktif</text><text y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4A5C75">HTML-based. Simulator &amp; kalkulator.</text></g>
+          <g transform="translate(1100 470)"><circle r="36" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><path d="M-12 0 Q -12 -12 0 -12 Q 12 -12 12 0"/><rect x="-13" y="0" width="6" height="10" rx="2" fill="#1E3A5F"/><rect x="7" y="0" width="6" height="10" rx="2" fill="#1E3A5F"/></g><text y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="500" fill="#1E3A5F">Audiobook</text><text y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4A5C75">Belajar sambil komuting / lapangan.</text></g>
+          <g transform="translate(800 540)"><circle r="36" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><rect x="-14" y="-9" width="28" height="18" rx="1"/><rect x="-12" y="-7" width="3" height="3" fill="#1E3A5F"/><rect x="-12" y="4" width="3" height="3" fill="#1E3A5F"/><rect x="9" y="-7" width="3" height="3" fill="#1E3A5F"/><rect x="9" y="4" width="3" height="3" fill="#1E3A5F"/><path d="M-3 -3 L4 0 L-3 3 Z" fill="#D4A04A" stroke="none"/></g><text y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="500" fill="#1E3A5F">Video Course</text><text y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4A5C75">Cohort-based. Timeline &amp; tugas.</text></g>
+          <g transform="translate(500 470)"><circle r="36" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><circle cx="0" cy="-2" r="10"/><path d="M-3 -5 L4 -2 L-3 1 Z" fill="#D4A04A" stroke="none"/><line x1="7" y1="6" x2="13" y2="12"/></g><text y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="500" fill="#1E3A5F">Video Tutorial</text><text y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4A5C75">Short-form. On-demand.</text></g>
+          <g transform="translate(370 300)"><circle r="36" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><rect x="-9" y="-14" width="18" height="28" rx="3"/><rect x="-6" y="-10" width="12" height="6" fill="#1E3A5F" stroke="none"/><circle cx="-3" cy="0" r="1.2" fill="#1E3A5F"/><circle cx="0" cy="0" r="1.2" fill="#1E3A5F"/><circle cx="3" cy="0" r="1.2" fill="#1E3A5F"/><circle cx="-3" cy="4" r="1.2" fill="#1E3A5F"/><circle cx="0" cy="4" r="1.2" fill="#1E3A5F"/><circle cx="3" cy="4" r="1.2" fill="#1E3A5F"/><circle cx="-3" cy="8" r="1.2" fill="#1E3A5F"/><circle cx="0" cy="8" r="1.2" fill="#1E3A5F"/><circle cx="3" cy="8" r="1.2" fill="#D4A04A"/></g><text y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="500" fill="#1E3A5F">Mining Apps</text><text y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4A5C75">Kalkulator, reference, simulator.</text></g>
+        </svg>
+      </div>
+      <div data-rv data-d="6" class="ital" style="text-align:center; font-size:18px; line-height:1.5; color:var(--text-primary); margin-top:4px;">Yang membuat MineCloud berbeda: bukan satu format dipaksakan ke semua orang. Kami sediakan format yang fit dengan cara belajar <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">masing-masing pengguna</span>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6 · PRODUCTS + MARKETPLACE -->
+<section data-label="06 Products &amp; Marketplace">
+  <div class="slide" data-particles="14" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.6 <span class="dot">·</span> Product Architecture &amp; Marketplace Model</div>
+    <div style="position:absolute; left:128px; right:128px; top:108px; bottom:108px; display:flex; flex-direction:column;">
+      <h2 class="serif" data-rv data-d="1" style="font-weight:500; font-size:50px; line-height:1.08; margin:0; max-width:1450px; letter-spacing:-0.01em;">Tujuh format produk dalam satu portal. Mulai dari kita.<br/>Lalu <span class="ital" style="color:var(--accent-terracotta);">kita buka untuk creator lain</span>.</h2>
+      <div data-rv data-d="2" style="margin-top:24px;">
+        <div class="mono" style="margin-bottom:12px;">Bulan 1–6 <span style="color:var(--accent-gold);">·</span> Kita Bangun Tujuh Format</div>
+        <div style="display:grid; grid-template-columns: repeat(7, 1fr); gap:14px;">
+          <div class="card" style="padding:18px;"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#1E3A5F" stroke-width="1.5"><path d="M3 6 L16 4 L29 6 L29 26 L16 24 L3 26 Z"/><line x1="16" y1="4" x2="16" y2="24"/></svg><span class="mono" style="color:var(--accent-gold); font-size:10px;">01</span></div><div class="serif" style="font-size:18px; margin-top:14px; font-weight:500; line-height:1.15;">Buku Fisik</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">Print-on-demand. Zero inventory risk.</div></div>
+          <div class="card" style="padding:18px;"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#1E3A5F" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="2"/><line x1="10" y1="10" x2="22" y2="10"/><line x1="10" y1="14" x2="22" y2="14"/><line x1="10" y1="18" x2="22" y2="18"/><line x1="10" y1="22" x2="18" y2="22"/></svg><span class="mono" style="color:var(--accent-gold); font-size:10px;">02</span></div><div class="serif" style="font-size:18px; margin-top:14px; font-weight:500; line-height:1.15;">Ebook</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">PDF dengan watermark per user.</div></div>
+          <div class="card" style="padding:18px;"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#1E3A5F" stroke-width="1.5"><rect x="4" y="6" width="24" height="20" rx="2"/><path d="M13 13 L18 16 L13 19 Z" fill="#D4A04A" stroke="none"/></svg><span class="mono" style="color:var(--accent-gold); font-size:10px;">03</span></div><div class="serif" style="font-size:18px; margin-top:14px; font-weight:500; line-height:1.15;">Buku Interaktif</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">HTML interaktif (model Buku Saku).</div></div>
+          <div class="card" style="padding:18px;"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#1E3A5F" stroke-width="1.5"><path d="M4 18 Q 4 6 16 6 Q 28 6 28 18"/><rect x="3" y="18" width="6" height="10" rx="2" fill="#1E3A5F"/><rect x="23" y="18" width="6" height="10" rx="2" fill="#1E3A5F"/></svg><span class="mono" style="color:var(--accent-gold); font-size:10px;">04</span></div><div class="serif" style="font-size:18px; margin-top:14px; font-weight:500; line-height:1.15;">Audiobook</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">Interview praktisi senior.</div></div>
+          <div class="card" style="padding:18px;"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#1E3A5F" stroke-width="1.5"><rect x="3" y="9" width="26" height="16" rx="1"/><rect x="6" y="12" width="2" height="2"/><rect x="6" y="20" width="2" height="2"/><rect x="24" y="12" width="2" height="2"/><rect x="24" y="20" width="2" height="2"/><path d="M14 14 L20 17 L14 20 Z" fill="#D4A04A" stroke="none"/></svg><span class="mono" style="color:var(--accent-gold); font-size:10px;">05</span></div><div class="serif" style="font-size:18px; margin-top:14px; font-weight:500; line-height:1.15;">Video Course</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">Cohort course terstruktur.</div></div>
+          <div class="card" style="padding:18px;"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#1E3A5F" stroke-width="1.5"><circle cx="14" cy="14" r="10"/><path d="M11 11 L18 14 L11 17 Z" fill="#D4A04A" stroke="none"/><line x1="22" y1="22" x2="28" y2="28"/></svg><span class="mono" style="color:var(--accent-gold); font-size:10px;">06</span></div><div class="serif" style="font-size:18px; margin-top:14px; font-weight:500; line-height:1.15;">Video Tutorial</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">On-demand short-form library.</div></div>
+          <div class="card" style="padding:18px;"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#1E3A5F" stroke-width="1.5"><rect x="9" y="3" width="14" height="26" rx="3"/><rect x="11" y="6" width="10" height="5" fill="#1E3A5F" stroke="none"/><circle cx="13" cy="15" r=".8" fill="#1E3A5F"/><circle cx="16" cy="15" r=".8" fill="#1E3A5F"/><circle cx="19" cy="15" r=".8" fill="#1E3A5F"/><circle cx="13" cy="19" r=".8" fill="#1E3A5F"/><circle cx="16" cy="19" r=".8" fill="#1E3A5F"/><circle cx="19" cy="19" r=".8" fill="#D4A04A"/><circle cx="13" cy="23" r=".8" fill="#1E3A5F"/><circle cx="16" cy="23" r=".8" fill="#1E3A5F"/></svg><span class="mono" style="color:var(--accent-gold); font-size:10px;">07</span></div><div class="serif" style="font-size:18px; margin-top:14px; font-weight:500; line-height:1.15;">Mining Apps</div><div style="font-size:12px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">Kalkulator, reference, simulator.</div></div>
+        </div>
+      </div>
+      <div data-rv data-d="3" style="margin-top:28px; flex:1; display:flex; flex-direction:column;">
+        <div class="mono" style="margin-bottom:12px;">Bulan 6–12 <span style="color:var(--accent-gold);">·</span> Marketplace Terbuka untuk Creator Lain</div>
+        <div style="display:grid; grid-template-columns: 1.3fr 1fr; gap:48px; flex:1; align-items:center;">
+          <svg viewBox="0 0 720 320" width="100%" style="display:block;">
+            <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1E3A5F"/></marker><marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#D4A04A"/></marker></defs>
+            <line x1="140" y1="160" x2="320" y2="160" stroke="#1E3A5F" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr)"/><line x1="420" y1="160" x2="600" y2="160" stroke="#1E3A5F" stroke-width="1.5" marker-end="url(#arr)"/><path d="M320 200 Q 230 240 140 200" stroke="#D4A04A" stroke-width="1.5" fill="none" marker-end="url(#arrG)"/><path d="M600 200 Q 510 240 420 200" stroke="#1E3A5F" stroke-width="1.2" fill="none" marker-end="url(#arr)"/>
+            <text x="230" y="148" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.3" fill="#1E3A5F">KONTEN</text><text x="510" y="148" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.3" fill="#1E3A5F">PRODUK</text><text x="230" y="262" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.3" fill="#D4A04A">REVENUE 50–70%</text><text x="510" y="262" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.3" fill="#1E3A5F">PURCHASE</text>
+            <g fill="#D4A04A"><circle r="3"><animateMotion dur="3.4s" repeatCount="indefinite" path="M140 160 L320 160"/></circle><circle r="3"><animateMotion dur="3.6s" repeatCount="indefinite" path="M420 160 L600 160"/></circle><circle r="3"><animateMotion dur="4s" repeatCount="indefinite" path="M320 200 Q 230 240 140 200"/></circle></g>
+            <g transform="translate(80 160)"><circle r="58" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><circle cx="0" cy="-14" r="9"/><path d="M-14 14 Q 0 -2 14 14"/><line x1="14" y1="-6" x2="22" y2="-14" stroke="#D4A04A" stroke-width="2"/><path d="M22 -14 L24 -16 L20 -20 L18 -18 Z" fill="#D4A04A" stroke="none"/></g><text y="84" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.4" fill="#1E3A5F">CREATOR</text><text y="102" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="12" fill="#4A5C75">Praktisi mining lain</text><text y="118" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="12" fill="#4A5C75">submit konten</text></g>
+            <g transform="translate(370 160)"><circle r="78" fill="rgba(212,160,74,0.12)"/><circle r="65" fill="#FFFFFF" stroke="#D4A04A" stroke-width="2" class="goldpulse"/><image href="assets/minecloud-logo.png" x="-54" y="-58" width="108" height="108" preserveAspectRatio="xMidYMid meet"/><text y="92" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.4" fill="#1E3A5F">MINECLOUD PLATFORM</text><text y="110" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="12" fill="#4A5C75">Review, distribusi,</text><text y="126" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="12" fill="#4A5C75">payment, marketing</text></g>
+            <g transform="translate(660 160)"><circle r="58" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.5"/><g stroke="#1E3A5F" stroke-width="1.5" fill="none"><circle cx="-10" cy="-10" r="7"/><circle cx="10" cy="-10" r="7"/><path d="M-22 18 Q -10 4 2 18 Q 12 4 22 18"/></g><text y="84" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.4" fill="#1E3A5F">PEMBELI</text><text y="102" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="12" fill="#4A5C75">Audience MineCloud</text><text y="118" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="12" fill="#4A5C75">yang loyal</text></g>
+          </svg>
+          <div><div class="mono" style="margin-bottom:14px;">Mengapa Marketplace Penting</div><ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;"><li style="display:flex; gap:14px; align-items:flex-start;"><span style="flex-shrink:0; width:10px; height:10px; border-radius:50%; background:var(--accent-gold); margin-top:6px;"></span><span style="font-size:15px; line-height:1.55;">Supply scaling tanpa kita produksi semua</span></li><li style="display:flex; gap:14px; align-items:flex-start;"><span style="flex-shrink:0; width:10px; height:10px; border-radius:50%; background:var(--accent-gold); margin-top:6px;"></span><span style="font-size:15px; line-height:1.55;">Network effect — semakin banyak creator, semakin valuable</span></li><li style="display:flex; gap:14px; align-items:flex-start;"><span style="flex-shrink:0; width:10px; height:10px; border-radius:50%; background:var(--accent-gold); margin-top:6px;"></span><span style="font-size:15px; line-height:1.55;">Monetisasi knowledge senior tambang</span></li><li style="display:flex; gap:14px; align-items:flex-start;"><span style="flex-shrink:0; width:10px; height:10px; border-radius:50%; background:var(--accent-gold); margin-top:6px;"></span><span style="font-size:15px; line-height:1.55;">Defensible moat yang sulit ditiru kompetitor</span></li></ul></div>
+        </div>
+      </div>
+      <div data-rv data-d="5" class="pullquote ital" style="margin-top:18px; text-align:center; font-size:22px; line-height:1.4; color:var(--text-primary);">MineCloud bukan toko buku tambang.<br/>MineCloud adalah <span style="font-style:italic; color:var(--accent-gold); font-weight:500;">YouTube-nya konten edukasi tambang Indonesia</span>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7 · 5-YEAR PROJECTION -->
+<section data-label="07 5-Year Trajectory">
+  <div class="slide" data-particles="14" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.7 <span class="dot">·</span> 5-Year Realistic Trajectory</div>
+    <div style="position:absolute; left:128px; right:128px; top:108px; bottom:108px; display:flex; flex-direction:column;">
+      <h2 class="serif" data-rv data-d="1" style="font-weight:500; font-size:54px; line-height:1.1; margin:0; letter-spacing:-0.01em;">Pertumbuhan yang <span class="ital" style="color:var(--accent-gold);">realistis</span>.<br/>Bukan janji yang agresif.</h2>
+      <div data-rv data-d="2" style="flex:1; margin-top:24px; position:relative;">
+        <svg viewBox="0 0 1660 580" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="display:block;">
+          <defs><linearGradient id="curveGrad" x1="0" x2="1" y1="0" y2="0"><stop offset="0%" stop-color="#1E3A5F"/><stop offset="100%" stop-color="#D4A04A"/></linearGradient><linearGradient id="curveFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#D4A04A" stop-opacity=".25"/><stop offset="100%" stop-color="#D4A04A" stop-opacity="0"/></linearGradient></defs>
+          <g font-family="JetBrains Mono, monospace" font-size="10" fill="#7A8499" letter-spacing="1.1"><text x="38" y="510" text-anchor="end">RP 0</text><text x="38" y="410" text-anchor="end">RP 2,5 M</text><text x="38" y="310" text-anchor="end">RP 5 M</text><text x="38" y="210" text-anchor="end">RP 7,5 M</text><text x="38" y="115" text-anchor="end">RP 10 M</text></g>
+          <g stroke="#1E3A5F" stroke-opacity=".07" stroke-width="1"><line x1="52" y1="510" x2="1640" y2="510"/><line x1="52" y1="410" x2="1640" y2="410"/><line x1="52" y1="310" x2="1640" y2="310"/><line x1="52" y1="210" x2="1640" y2="210"/><line x1="52" y1="110" x2="1640" y2="110"/></g>
+          <line x1="52" y1="510" x2="1640" y2="510" stroke="#1E3A5F" stroke-opacity=".35" stroke-width="1.2"/>
+          <path d="M 200 502 Q 480 480 740 410 T 1180 240 T 1500 105 L 1500 510 L 200 510 Z" fill="url(#curveFill)"/>
+          <path class="draw" pathLength="1" d="M 200 502 Q 480 480 740 410 T 1180 240 T 1500 105" stroke="url(#curveGrad)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <g font-family="JetBrains Mono, monospace" font-size="11" fill="#1E3A5F" letter-spacing="1.4" font-weight="500" text-anchor="middle"><text x="200" y="538">Y1</text><text x="525" y="538">Y2</text><text x="850" y="538">Y3</text><text x="1175" y="538">Y4</text><text x="1500" y="538">Y5</text></g>
+          <line x1="200" y1="510" x2="200" y2="200" stroke="#1E3A5F" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 3"/><circle cx="200" cy="502" r="7" fill="#D4A04A" class="goldpulse"/>
+          <line x1="525" y1="510" x2="525" y2="200" stroke="#1E3A5F" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 3"/><circle cx="525" cy="478" r="7" fill="#D4A04A" class="goldpulse" style="animation-duration:3.6s"/>
+          <line x1="850" y1="510" x2="850" y2="200" stroke="#1E3A5F" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 3"/><circle cx="850" cy="362" r="7" fill="#D4A04A" class="goldpulse" style="animation-duration:3.2s"/>
+          <line x1="1175" y1="510" x2="1175" y2="200" stroke="#1E3A5F" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 3"/><circle cx="1175" cy="245" r="7" fill="#D4A04A" class="goldpulse" style="animation-duration:3.8s"/>
+          <line x1="1500" y1="510" x2="1500" y2="200" stroke="#1E3A5F" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 3"/><circle cx="1500" cy="105" r="8" fill="#D4A04A" class="goldpulse" style="animation-duration:3s"/>
+        </svg>
+        <div style="position:absolute; inset:0; pointer-events:none;">
+          <div class="card" style="position:absolute; left:5.6%; top:0; width:185px; padding:14px 16px;"><div class="mono" style="font-size:10px;">Tahun 01</div><div class="serif" style="font-size:17px; margin-top:4px; font-weight:500; line-height:1.15;">Foundation</div><div style="font-size:10px; color:var(--text-secondary); margin-top:8px; font-family:var(--mono); letter-spacing:.08em; line-height:1.6;">3K SUB · 400 CUST</div><div class="serif" style="font-size:24px; color:var(--accent-gold); margin-top:6px; line-height:1;">Rp 100 jt</div></div>
+          <div class="card" style="position:absolute; left:25.2%; top:0; width:185px; padding:14px 16px;"><div class="mono" style="font-size:10px;">Tahun 02</div><div class="serif" style="font-size:17px; margin-top:4px; font-weight:500; line-height:1.15;">Marketplace Opens</div><div style="font-size:10px; color:var(--text-secondary); margin-top:8px; font-family:var(--mono); letter-spacing:.08em; line-height:1.6;">12K SUB · 2K CUST · 1 PILOT</div><div class="serif" style="font-size:24px; color:var(--accent-gold); margin-top:6px; line-height:1;">Rp 775 jt</div></div>
+          <div class="card" style="position:absolute; left:44.8%; top:0; width:185px; padding:14px 16px;"><div class="mono" style="font-size:10px;">Tahun 03</div><div class="serif" style="font-size:17px; margin-top:4px; font-weight:500; line-height:1.15;">B2B Validation</div><div style="font-size:10px; color:var(--text-secondary); margin-top:8px; font-family:var(--mono); letter-spacing:.08em; line-height:1.6;">25K SUB · 4K CUST · 5 CORP</div><div class="serif" style="font-size:24px; color:var(--accent-gold); margin-top:6px; line-height:1;">Rp 2,6 M</div></div>
+          <div class="card" style="position:absolute; left:64.4%; top:0; width:185px; padding:14px 16px;"><div class="mono" style="font-size:10px;">Tahun 04</div><div class="serif" style="font-size:17px; margin-top:4px; font-weight:500; line-height:1.15;">Market Position</div><div style="font-size:10px; color:var(--text-secondary); margin-top:8px; font-family:var(--mono); letter-spacing:.08em; line-height:1.6;">50K SUB · 7K CUST · 12 CORP</div><div class="serif" style="font-size:24px; color:var(--accent-gold); margin-top:6px; line-height:1;">Rp 5,5 M</div></div>
+          <div class="card" style="position:absolute; left:84%; top:0; width:185px; padding:14px 16px; border-color:var(--accent-gold);"><div class="mono" style="font-size:10px; color:var(--accent-gold);">Tahun 05</div><div class="serif" style="font-size:17px; margin-top:4px; font-weight:500; line-height:1.15;">Established Player</div><div style="font-size:10px; color:var(--text-secondary); margin-top:8px; font-family:var(--mono); letter-spacing:.08em; line-height:1.6;">80K SUB · 12K CUST · 20 CORP</div><div class="serif" style="font-size:24px; color:var(--accent-gold); margin-top:6px; line-height:1;">Rp 9–10 M</div></div>
+        </div>
+      </div>
+      <div data-rv data-d="3" style="margin-top:8px; display:flex; align-items:center; gap:24px; justify-content:center;"><span style="height:1.5px; background:var(--accent-gold); flex:1; max-width:120px;"></span><span class="mono" style="font-size:13px; color:var(--accent-navy);">MODAL AWAL Rp 5 JT <span style="color:var(--accent-gold);">·</span> BOOTSTRAP DARI REVENUE <span style="color:var(--accent-gold);">·</span> TIDAK BUTUH INVESTOR</span><span style="height:1.5px; background:var(--accent-gold); flex:1; max-width:120px;"></span></div>
+      <div data-rv data-d="4" class="ital" style="text-align:center; font-size:18px; color:var(--text-secondary); margin-top:12px; line-height:1.55;">Goal Y5: <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">Rp 800 juta/bulan run rate</span>. Cukup untuk membangun bisnis yang sustainable dan impactful &mdash; tanpa over-promise.</div>
+      <div data-rv data-d="5" class="mono-sm" style="margin-top:14px; text-align:center; max-width:1300px; margin-left:auto; margin-right:auto; line-height:1.55;">Proyeksi berdasarkan 0,5% market penetration B2C, conversion rate subscriber→paying ~15%, B2B contract size Rp 120–150jt/tahun. Worst case: 50% dari proyeksi (~Rp 5M Y5). Asumsi konservatif, bukan agresif.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8 · WHY US TOGETHER -->
+<section data-label="08 Why Us Together">
+  <div class="slide" data-particles="14" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.8 <span class="dot">·</span> Complementary Strengths</div>
+    <div style="position:absolute; left:128px; right:128px; top:108px; bottom:108px; display:flex; flex-direction:column;">
+      <h2 class="serif" data-rv data-d="1" style="font-weight:500; font-size:54px; line-height:1.1; margin:0; letter-spacing:-0.01em;">Youth + Experience. Execution + Wisdom. Tech + <span class="ital" style="color:var(--accent-gold);">Industry</span>.</h2>
+      <div style="flex:1; margin-top:36px; position:relative; display:grid; grid-template-columns: 1fr 1fr; gap:96px;">
+        <div style="position:absolute; left:50%; top:0; bottom:0; width:1.5px; background:var(--accent-navy); opacity:.6; transform:translateX(-50%);"></div>
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:64px; height:64px; border-radius:50%; background:var(--bg-paper); display:flex; align-items:center; justify-content:center; z-index:1;"><span class="serif" style="font-size:52px; color:var(--accent-gold); font-weight:500; line-height:1;">+</span></div>
+        <div data-rv data-d="2"><div class="mono" style="margin-bottom:24px;">Apa yang saya bawa</div><ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:24px;"><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C77B45" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><circle cx="16" cy="16" r="6"/><circle cx="16" cy="16" r="11"/><line x1="16" y1="3" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="29"/><line x1="3" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="29" y2="16"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">4+ tahun di operasional tambang</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Paham pain customer dari dalam</div></div></li><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C77B45" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><polyline points="10 9 4 16 10 23"/><polyline points="22 9 28 16 22 23"/><line x1="18" y1="6" x2="14" y2="26"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">Full-stack technical capability</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Bangun platform tanpa dev team mahal</div></div></li><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C77B45" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><path d="M4 28 L20 12 L24 16 L8 32 Z" transform="translate(0 -4)"/><path d="M20 8 L24 12"/><line x1="6" y1="26" x2="3" y2="29"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">Skill produksi konten teruji</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Buku Saku Pengawas Pit, Apps Calc Productivity</div></div></li><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C77B45" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><polygon points="16 3 7 18 14 18 12 29 25 13 17 13 19 3"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">Komitmen jangka panjang</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">3 jam/hari konsisten.</div></div></li><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#C77B45" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><circle cx="16" cy="16" r="3"/><ellipse cx="16" cy="16" rx="13" ry="6"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(120 16 16)"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">AI-assisted productivity</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Claude</div></div></li></ul></div>
+        <div data-rv data-d="3"><div class="mono" style="margin-bottom:24px;">Apa yang saya butuh dari Anda</div><ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:24px;"><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#5B9BD5" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><path d="M16 4 Q 8 4 8 12 Q 4 14 6 20 Q 4 25 10 26 Q 10 30 16 28 Q 22 30 22 26 Q 28 25 26 20 Q 28 14 24 12 Q 24 4 16 4 Z"/><path d="M12 14 Q 16 16 20 14 M14 20 Q 16 22 18 20"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">Wisdom industri</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Pemahaman pasar dan sejarah</div></div></li><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#5B9BD5" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><path d="M4 16 L10 10 L14 14 L18 10 L22 14 L28 8"/><path d="M14 14 L18 18 L22 14"/><circle cx="9" cy="22" r="3"/><circle cx="23" cy="22" r="3"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">Network senior</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Akses decision maker industri</div></div></li><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#5B9BD5" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><rect x="6" y="4" width="20" height="4"/><rect x="10" y="8" width="12" height="18"/><rect x="6" y="26" width="20" height="4"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">Brand credibility</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Nama yang membuka pintu strategis</div></div></li><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#5B9BD5" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><circle cx="16" cy="16" r="12"/><polygon points="16 10 19 16 16 22 13 16" fill="#5B9BD5" fill-opacity=".2"/><line x1="16" y1="4" x2="16" y2="7"/><line x1="16" y1="25" x2="16" y2="28"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">Mentorship strategis</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Pendapat di momen kritikal</div></div></li><li style="display:flex; gap:18px;"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#5B9BD5" stroke-width="1.5" style="flex-shrink:0; margin-top:2px;"><path d="M5 6 L16 4 L27 6 L27 26 L16 24 L5 26 Z"/><line x1="16" y1="4" x2="16" y2="24"/></svg><div><div class="serif" style="font-size:19px; font-weight:500;">Content authority</div><div style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Knowledge yang tidak bisa ditiru</div></div></li></ul></div>
+      </div>
+      <div data-rv data-d="5" class="pullquote ital" style="margin-top:32px; text-align:center; font-size:24px; line-height:1.4; color:var(--text-primary);">Saya bisa eksekusi taktis. Anda bisa membuka pintu strategis.<br/><span style="font-style:italic; color:var(--accent-gold); font-weight:500;">MineCloud butuh keduanya.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 9 · CLOSING INVITATION -->
+<section data-label="09 Closing Invitation">
+  <div class="slide" data-particles="22" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.9 <span class="dot">·</span> Invitation</div>
+    <svg style="position:absolute; right:-80px; top:80px; opacity:.08; pointer-events:none;" width="640" height="380" viewBox="0 0 640 380" fill="none"><path d="M120 280 Q 80 280 80 240 Q 30 240 60 190 Q 50 140 110 140 Q 130 80 220 100 Q 270 50 340 90 Q 430 70 460 140 Q 540 130 540 200 Q 600 200 580 260 Q 600 290 540 290 Z" fill="#1E3A5F"/><g stroke="#5B9BD5" stroke-width="1" fill="none" stroke-opacity=".5"><path d="M140 180 L220 180 L220 140 L290 140"/><path d="M310 200 L390 200 L390 240 L460 240"/><circle cx="140" cy="180" r="3" fill="#5B9BD5"/><circle cx="290" cy="140" r="3" fill="#5B9BD5"/><circle cx="460" cy="240" r="3" fill="#5B9BD5"/></g></svg>
+    <div style="position:absolute; left:128px; right:128px; top:160px; bottom:96px; display:flex; flex-direction:column; align-items:center;">
+      <div class="ital" data-rv data-d="1" style="font-size:60px; line-height:1.15; text-align:center; max-width:1400px; color:var(--text-primary);">Saya tidak ngajak Anda karena saya butuh nama.<br/>Saya ngajak karena saya butuh <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">partner</span>.</div>
+      <p data-rv data-d="2" class="ital" style="margin-top:36px; max-width:760px; text-align:center; font-size:18px; line-height:1.85; color:var(--text-secondary);">Saya tahu Anda bisa pilih untuk fokus pada karier Anda saat ini, dan itu valid. Tapi saya juga tahu &mdash; dari mengamati Anda bertahun-tahun &mdash; bahwa Anda peduli dengan masa depan industri ini. MineCloud adalah cara mewujudkan kepedulian itu menjadi infrastruktur nyata.</p>
+      <div data-rv data-d="3" style="margin-top:42px; display:grid; grid-template-columns: 1fr 1px 1fr; gap:48px; width:100%; max-width:1100px;">
+        <div><div class="mono" style="margin-bottom:16px;">Jika Anda Tertarik</div><ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;"><li style="display:flex; gap:12px; align-items:flex-start;"><span style="flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--accent-gold); margin-top:7px;"></span><span style="font-size:15px; line-height:1.55;">Minggu depan &mdash; 30 menit ngopi atau virtual call</span></li><li style="display:flex; gap:12px; align-items:flex-start;"><span style="flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--accent-gold); margin-top:7px;"></span><span style="font-size:15px; line-height:1.55;">Materi pendukung siap: financial model, tech architecture</span></li><li style="display:flex; gap:12px; align-items:flex-start;"><span style="flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--accent-gold); margin-top:7px;"></span><span style="font-size:15px; line-height:1.55;">30–60 hari soft exploration tanpa commitment</span></li><li style="display:flex; gap:12px; align-items:flex-start;"><span style="flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--accent-gold); margin-top:7px;"></span><span style="font-size:15px; line-height:1.55;">Jika cocok &mdash; kita lanjutkan perjalanan bersama</span></li></ul></div>
+        <div style="background:var(--line-medium); width:1px;"></div>
+        <div><div class="mono" style="margin-bottom:16px;">Jika Tidak Fit</div><ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;"><li style="display:flex; gap:12px; align-items:flex-start;"><span style="flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--accent-gold); margin-top:7px;"></span><span style="font-size:15px; line-height:1.55;">Saya appreciate waktu Anda untuk mendengarkan</span></li><li style="display:flex; gap:12px; align-items:flex-start;"><span style="flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--accent-gold); margin-top:7px;"></span><span style="font-size:15px; line-height:1.55;">Yang saya minta: honest feedback tentang kenapa</span></li><li style="display:flex; gap:12px; align-items:flex-start;"><span style="flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--accent-gold); margin-top:7px;"></span><span style="font-size:15px; line-height:1.55;">Pendapat Anda &mdash; sekalipun &lsquo;tidak&rsquo; &mdash; adalah hadiah</span></li></ul></div>
+      </div>
+      <div data-rv data-d="5" style="margin-top:48px; text-align:center;">
+        <svg width="84" height="10" viewBox="0 0 84 10" style="margin-bottom:16px;"><path class="draw" pathLength="1" d="M2 5 Q 25 1 45 5 T 82 4" stroke="#D4A04A" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+        <div class="serif" style="font-size:28px; line-height:1.1;">Ir. Fransiscus Saferius, S.T.</div>
+        <div class="mono" style="margin-top:10px; color:var(--accent-gold);">Founder, MineCloud</div>
+        <div class="mono-sm" style="margin-top:14px;">EMAIL <span style="color:var(--accent-gold);">·</span> LINKEDIN <span style="color:var(--accent-gold);">·</span> WHATSAPP</div>
+      </div>
+    </div>
+    <svg style="position:absolute; right:36px; bottom:90px; opacity:.5;" width="160" height="90" viewBox="0 0 160 90" fill="none"><g stroke="#1E3A5F" stroke-opacity=".15" stroke-width=".8"><path d="M0 50 Q 40 25 80 45 T 160 35"/><path d="M0 70 Q 50 45 90 60 T 160 55"/></g></svg>
+  </div>
+</section>
+
+<!-- SLIDE 10 · FUTURE EXPANSION -->
+<section data-label="10 Future Expansion">
+  <div class="slide" data-particles="14" style="width:100%; height:100%;">
+    <div class="figlabel">Fig. M.10 <span class="dot">·</span> Future Expansion</div>
+    <div style="position:absolute; left:128px; right:128px; top:108px; bottom:108px; display:flex; flex-direction:column;">
+      <h2 class="serif" data-rv data-d="1" style="font-weight:500; font-size:50px; line-height:1.1; margin:0; max-width:1500px; letter-spacing:-0.01em;">24 bulan pertama hanya <span style="font-weight:500;">awal</span>. Visi besar MineCloud <span class="ital" style="color:var(--accent-gold);">jauh lebih luas</span>.</h2>
+      <p class="ital" data-rv data-d="2" style="font-size:18px; line-height:1.6; color:var(--text-secondary); max-width:1000px; margin:16px 0 0;">MineCloud dimulai dari konten edukasi general tambang. Tapi industri kita sangat luas &mdash; dan ada banyak vertikal spesifik yang underserved. Berikut peta pengembangan untuk 3–5 tahun ke depan.</p>
+      <div data-rv data-d="3" style="flex:1; margin-top:20px; display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; align-content:start;">
+        <div style="grid-column: 2 / span 2; padding:16px; border:1.5px solid var(--accent-gold); border-radius:6px; background:rgba(212,160,74,.06); display:flex; align-items:center; gap:18px;"><div style="flex-shrink:0; width:54px; height:54px; border-radius:50%; background:#FFF; border:1.5px solid var(--accent-gold); display:flex; align-items:center; justify-content:center;" class="goldpulse"><svg width="28" height="28" viewBox="-20 -20 40 40"><g stroke="#1E3A5F" stroke-width="2" fill="none" stroke-linecap="round"><path d="M-12 -8 Q 0 -12 12 -8"/><line x1="0" y1="-8" x2="0" y2="14"/><circle cx="0" cy="-8" r="2.5" fill="#D4A04A" stroke="none"/></g></svg></div><div><div class="mono" style="color:var(--accent-gold);">MineCloud Core</div><div class="ital" style="font-size:14px; color:var(--text-secondary); margin-top:3px;">Konten edukasi tambang general</div></div></div>
+        <div style="padding:16px; border:1px solid var(--line-medium); border-left:3px solid var(--accent-terracotta); border-radius:6px; background:var(--bg-card);"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#C77B45" stroke-width="1.5"><path d="M6 16 Q 6 6 13 6 Q 20 6 20 16 L 20 18 L 6 18 Z"/><rect x="4" y="18" width="18" height="3"/><path d="M11 12 L13 14 L17 10"/></svg><span class="mono" style="color:var(--accent-terracotta); font-size:10px;">01</span></div><div class="serif" style="font-size:14px; margin-top:8px; font-weight:500; line-height:1.2;">Safety &amp; K3 Specialization</div><div class="ital" style="font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Vertikal pertama yang paling urgent</div><div style="margin-top:10px; font-size:11px; color:var(--text-secondary); line-height:1.55;">K3, SMKP, hazard ID, investigasi kecelakaan, VR safety (Y3–4)</div><div style="margin-top:8px; font-size:10px; color:var(--accent-terracotta); font-family:var(--mono); letter-spacing:.06em;">49 FATALITY · 2024</div></div>
+        <div style="padding:16px; border:1px solid var(--line-medium); border-left:3px solid var(--accent-blue); border-radius:6px; background:var(--bg-card);"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#5B9BD5" stroke-width="1.5"><polygon points="13 4 22 9 22 19 13 24 4 19 4 9"/><line x1="13" y1="4" x2="13" y2="14"/><line x1="4" y1="9" x2="13" y2="14"/><line x1="22" y1="9" x2="13" y2="14"/></svg><span class="mono" style="color:var(--accent-blue); font-size:10px;">02</span></div><div class="serif" style="font-size:14px; margin-top:8px; font-weight:500; line-height:1.2;">Mine Planning &amp; Engineering</div><div class="ital" style="font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Vertikal premium untuk engineer</div><div style="margin-top:10px; font-size:11px; color:var(--text-secondary); line-height:1.55;">Surpac, Minescape, Datamine · resource estimation · pit optimization</div><div style="margin-top:8px; font-size:10px; color:var(--accent-blue); font-family:var(--mono); letter-spacing:.06em;">JORC · CRIRSCO</div></div>
+        <div style="padding:16px; border:1px solid var(--line-medium); border-left:3px solid #4A8B6F; border-radius:6px; background:var(--bg-card);"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#4A8B6F" stroke-width="1.5"><path d="M13 22 L13 14"/><path d="M13 14 Q 6 14 6 8 Q 13 8 13 14"/><path d="M13 14 Q 20 14 20 8 Q 13 8 13 14"/><path d="M8 22 L18 22"/></svg><span class="mono" style="color:#4A8B6F; font-size:10px;">03</span></div><div class="serif" style="font-size:14px; margin-top:8px; font-weight:500; line-height:1.2;">ESG &amp; Sustainability</div><div class="ital" style="font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Vertikal yang akan booming 3–5 tahun</div><div style="margin-top:10px; font-size:11px; color:var(--text-secondary); line-height:1.55;">Reklamasi, community dev, carbon accounting, sustainability reporting</div><div style="margin-top:8px; font-size:10px; color:#4A8B6F; font-family:var(--mono); letter-spacing:.06em;">IFRS S1/S2 · TCFD · GRI</div></div>
+        <div style="padding:16px; border:1px solid var(--line-medium); border-left:3px solid var(--accent-gold); border-radius:6px; background:var(--bg-card);"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#D4A04A" stroke-width="1.5"><rect x="3" y="10" width="14" height="9" rx="1"/><path d="M17 14 L22 14 L22 19 L17 19"/><circle cx="8" cy="20" r="2.5"/><circle cx="19" cy="20" r="2.5"/></svg><span class="mono" style="color:var(--accent-gold); font-size:10px;">04</span></div><div class="serif" style="font-size:14px; margin-top:8px; font-weight:500; line-height:1.2;">Equipment &amp; Technology</div><div class="ital" style="font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Vertikal teknis yang spesifik</div><div style="margin-top:10px; font-size:11px; color:var(--text-secondary); line-height:1.55;">Heavy equipment, autonomous mining, drilling &amp; blasting, ventilation</div><div style="margin-top:8px; font-size:10px; color:var(--accent-gold); font-family:var(--mono); letter-spacing:.06em;">BEV · AUTOMATION</div></div>
+        <div style="padding:16px; border:1px solid var(--line-medium); border-left:3px solid var(--accent-navy); border-radius:6px; background:var(--bg-card);"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#1E3A5F" stroke-width="1.5"><path d="M6 4 L18 4 L20 6 L20 22 L6 22 Z"/><line x1="9" y1="10" x2="17" y2="10"/><line x1="9" y1="13" x2="17" y2="13"/><path d="M9 17 L11 19 L15 15"/></svg><span class="mono" style="color:var(--accent-navy); font-size:10px;">05</span></div><div class="serif" style="font-size:14px; margin-top:8px; font-weight:500; line-height:1.2;">Regulatory &amp; Compliance</div><div class="ital" style="font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Untuk middle-senior management</div><div style="margin-top:10px; font-size:11px; color:var(--text-secondary); line-height:1.55;">PerMen ESDM, AMDAL, royalty, IUP/IUPK, hilirisasi &amp; smelter</div><div style="margin-top:8px; font-size:10px; color:var(--accent-navy); font-family:var(--mono); letter-spacing:.06em;">CONTINUOUS LEARNING</div></div>
+        <div style="padding:16px; border:1px solid var(--line-medium); border-left:3px solid var(--accent-terracotta-soft); border-radius:6px; background:var(--bg-card);"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#D8895A" stroke-width="1.5"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><path d="M4 20 Q 9 14 14 20"/><path d="M12 20 Q 17 14 22 20"/><path d="M20 6 L20 2 M18 4 L22 4"/></svg><span class="mono" style="color:var(--accent-terracotta-soft); font-size:10px;">06</span></div><div class="serif" style="font-size:14px; margin-top:8px; font-weight:500; line-height:1.2;">Leadership &amp; Management</div><div class="ital" style="font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Soft skill untuk pengawas–manager</div><div style="margin-top:10px; font-size:11px; color:var(--text-secondary); line-height:1.55;">Supervisor leadership, cross-cultural mgmt, crisis comm, decision-making</div><div style="margin-top:8px; font-size:10px; color:var(--accent-terracotta-soft); font-family:var(--mono); letter-spacing:.06em;">PENGAWAS → MANAGER</div></div>
+        <div style="padding:16px; border:1.5px dashed var(--accent-blue-soft); border-radius:6px; background:rgba(135,206,235,.08);"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#5B9BD5" stroke-width="1.5"><circle cx="13" cy="13" r="9"/><ellipse cx="13" cy="13" rx="9" ry="4"/><line x1="13" y1="4" x2="13" y2="22"/><circle cx="18" cy="9" r="1.5" fill="#D4A04A"/></svg><span class="mono" style="color:var(--accent-blue); font-size:10px;">07 · Y5+</span></div><div class="serif" style="font-size:14px; margin-top:8px; font-weight:500; line-height:1.2;">International Expansion</div><div class="ital" style="font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4;">Lokalisasi untuk pasar ASEAN</div><div style="margin-top:10px; font-size:11px; color:var(--text-secondary); line-height:1.55;">English content, Filipina, Malaysia, Vietnam, Mongolia, ASEAN partnership</div><div style="margin-top:8px; font-size:10px; color:var(--accent-blue); font-family:var(--mono); letter-spacing:.06em;">ASEAN MARKET</div></div>
+        <div style="padding:16px; border-radius:6px; display:flex; flex-direction:column; justify-content:center;"><div class="mono-sm" style="color:var(--text-tertiary); line-height:1.55;">Vertikal berkembang seiring industri tumbuh. Setiap branch adalah peluang &mdash; bukan janji.</div></div>
+      </div>
+      <div data-rv data-d="5" class="pullquote ital" style="margin-top:20px; text-align:center; font-size:20px; line-height:1.5; color:var(--text-primary);">MineCloud bukan hanya portal training tambang.<br/>MineCloud adalah <span style="font-style:normal; color:var(--accent-gold); font-weight:500;">knowledge ecosystem</span> yang berkembang seiring industri ini berkembang.</div>
+    </div>
+  </div>
+</section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+<script>
+(function(){
+  const stage = document.querySelector('deck-stage');
+  if(!stage) return;
+  const ready = () => {
+    const sections = stage.querySelectorAll(':scope > section');
+    const total = sections.length;
+    sections.forEach((sec, i) => {
+      if (sec.dataset.chromeApplied) return;
+      sec.dataset.chromeApplied = "1";
+      const slide = sec.querySelector('.slide') || sec;
+      const prog = document.createElement('div');
+      prog.className = 'topprog';
+      prog.style.width = ((i+1)/total*100).toFixed(2) + '%';
+      slide.appendChild(prog);
+      if (!sec.dataset.noLogo) {
+        const img = document.createElement('img');
+        img.src = 'assets/minecloud-logo.png';
+        img.alt = 'MineCloud';
+        img.className = 'logomark';
+        slide.appendChild(img);
+      }
+      const c = document.createElement('div');
+      c.className = 'counter';
+      const counterText = document.createElement('b');
+      counterText.textContent = String(i+1).padStart(2,'0');
+      c.appendChild(counterText);
+      c.append('  /  ' + String(total).padStart(2,'0'));
+      slide.appendChild(c);
+      const dn = document.createElement('div');
+      dn.className = 'dotnav';
+      for (let k=0;k<total;k++){
+        const d = document.createElement('i');
+        if (k===i) d.className = 'on';
+        dn.appendChild(d);
+      }
+      slide.appendChild(dn);
+    });
+  };
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(ready, 50);
+  } else {
+    window.addEventListener('DOMContentLoaded', () => setTimeout(ready, 50));
+  }
+  stage.addEventListener('slidechange', (e) => {
+    const sec = e.detail && e.detail.slide;
+    if (!sec) return;
+    sec.classList.remove('entering');
+    void sec.offsetHeight;
+    sec.classList.add('entering');
+    setTimeout(() => sec.classList.remove('entering'), 2400);
+  });
+})();
+</script>
+<script>
+(function(){
+  function makeParticles(host, count){
+    const wrap = document.createElement('div');
+    wrap.className = 'particles';
+    const pal = ['var(--accent-gold)','var(--accent-terracotta)','var(--accent-blue)'];
+    for (let i=0;i<count;i++){
+      const s = document.createElement('span');
+      s.style.left = Math.random()*100+'%';
+      const size = 1 + Math.random()*1.6;
+      s.style.width = size+'px';
+      s.style.height = size+'px';
+      s.style.background = pal[i % pal.length];
+      const dur = 14 + Math.random()*18;
+      s.style.animationDuration = dur+'s';
+      s.style.animationDelay = -Math.random()*dur+'s';
+      wrap.appendChild(s);
+    }
+    host.appendChild(wrap);
+  }
+  function init(){
+    document.querySelectorAll('.slide').forEach(s => {
+      const n = parseInt(s.dataset.particles || '18', 10);
+      if (n>0) makeParticles(s, n);
+    });
+  }
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(init, 60);
+  } else {
+    window.addEventListener('DOMContentLoaded', () => setTimeout(init, 60));
+  }
+})();
+</script>
+
+</body>
+</html>
